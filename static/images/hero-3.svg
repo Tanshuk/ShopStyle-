@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
+  <defs>
+    <linearGradient id='g3' x1='0' x2='1'>
+      <stop offset='0' stop-color='#a01daa'/>
+      <stop offset='1' stop-color='#f953c6'/>
+    </linearGradient>
+  </defs>
+  <rect width='100%' height='100%' fill='url(#g3)' />
+  <g transform='translate(160,120)'>
+    <ellipse cx='1200' cy='540' rx='260' ry='140' fill='#ffffff' opacity='0.06'/>
+    <text x='40' y='220' fill='white' font-family='Playfair Display, serif' font-size='62' font-weight='700'>Women's</text>
+    <text x='40' y='300' fill='white' font-family='Playfair Display, serif' font-size='62' font-weight='700'>Summer Edit</text>
+  </g>
+</svg>

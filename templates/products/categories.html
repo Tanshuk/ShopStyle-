@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Categories - ShopStyle{% endblock %}
+
+{% block content %}
+<div class="categories-page">
+    <!-- Header -->
+    <div class="categories-header">
+        <div class="container">
+            <h1 class="page-title">Shop by Categories</h1>
+            <p class="subtitle">Explore our wide range of products</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row g-4">
+            {% for category in categories %}
+            <div class="col-12 col-sm-6 col-lg-4">
+                <a href="{% url 'products:list' %}?category={{ category.slug }}" class="category-card">
+                    <div class="category-card-body">
+                        <div class="category-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3 class="category-name">{{ category.name }}</h3>
+                        {% if category.description %}
+                        <p class="category-description">{{ category.description }}</p>
+                        {% endif %}
+                        <span class="category-link">
+                            Browse <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <p>No categories available yet. Please check back later!</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .categories-page {
+        min-height: 80vh;
+    }
+    
+    .categories-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    .category-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+    }
+    
+    .category-card-body {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 40px 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .category-card:hover .category-card-body {
+        border-color: #FF3F6C;
+        box-shadow: 0 12px 32px rgba(255, 63, 108, 0.15);
+        transform: translateY(-8px);
+    }
+    
+    .category-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .category-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 12px;
+    }
+    
+    .category-description {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 16px;
+        line-height: 1.5;
+    }
+    
+    .category-link {
+        color: #FF3F6C;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .category-card:hover .category-link {
+        gap: 12px;
+    }
+    
+    .category-link i {
+        font-size: 0.8rem;
+    }
+</style>
+{% endblock %}

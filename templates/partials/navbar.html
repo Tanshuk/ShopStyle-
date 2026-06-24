@@ -1,0 +1,269 @@
+{% load static %}
+
+<!-- ================================================================
+     STICKY GLASSMORPHISM NAVBAR
+================================================================ -->
+<nav class="navbar navbar-expand-lg sticky-top glass-navbar" id="mainNavbar">
+    <div class="container-fluid px-3 px-xl-5">
+
+        <!-- ── Mobile: Hamburger ── -->
+        <button class="navbar-toggler border-0 p-1 me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenuCanvas"
+                aria-controls="mobileMenuCanvas"
+                aria-label="Toggle navigation">
+            <i class="fas fa-bars fs-5"></i>
+        </button>
+
+        <!-- ── Brand Logo ── -->
+        <a class="navbar-brand me-4" href="{% url 'core:home' %}">
+            <span class="brand-logo">Shop<span class="brand-accent">Style</span></span>
+        </a>
+
+        <!-- ── Desktop Navigation (hidden on mobile) ── -->
+        <div class="collapse navbar-collapse" id="desktopNav">
+
+            <!-- Category Links -->
+            <ul class="navbar-nav nav-cats me-auto">
+                <li class="nav-item">
+                    <a class="nav-link cat-link" href="{% url 'products:list' %}?gender=men">Men</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cat-link" href="{% url 'products:list' %}?gender=women">Women</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cat-link" href="{% url 'products:list' %}?gender=kids">Kids</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cat-link" href="{% url 'products:list' %}?category=home-living">Home & Living</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cat-link" href="{% url 'products:list' %}?category=beauty">Beauty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cat-link cat-link--sale" href="{% url 'products:list' %}?sale=true">
+                        Studio&nbsp;<i class="fas fa-bolt"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search Bar -->
+            <form class="nav-search-form" action="{% url 'products:search' %}" method="get" autocomplete="off">
+                <div class="nav-search-wrapper">
+                    <i class="fas fa-search nav-search-icon"></i>
+                    <input
+                        class="nav-search-input"
+                        type="search"
+                        name="q"
+                        id="navSearchInput"
+                        placeholder="Search brands, products &amp; more"
+                        value="{{ request.GET.q|default:'' }}"
+                    >
+                    <!-- Live Suggestions (populated by JS in Step 4) -->
+                    <div class="search-dropdown" id="searchDropdown"></div>
+                </div>
+            </form>
+
+            <!-- Right Icon Group -->
+            <ul class="navbar-nav nav-actions ms-2">
+
+                <!-- Wishlist -->
+                <li class="nav-item">
+                    <a class="nav-action-link" href="{% url 'wishlist:list' %}">
+                        <span class="action-icon-wrap">
+                            <i class="far fa-heart"></i>
+                            {% if wishlist_count and wishlist_count > 0 %}
+                                <span class="action-badge">{{ wishlist_count }}</span>
+                            {% endif %}
+                        </span>
+                        <span class="action-label">Wishlist</span>
+                    </a>
+                </li>
+
+                <!-- Cart / Bag -->
+                <li class="nav-item">
+                    <a class="nav-action-link" href="{% url 'cart:detail' %}">
+                        <span class="action-icon-wrap">
+                            <i class="fas fa-shopping-bag"></i>
+                            {% if cart_count and cart_count > 0 %}
+                                <span class="action-badge cart-badge">{{ cart_count }}</span>
+                            {% endif %}
+                        </span>
+                        <span class="action-label">Bag</span>
+                    </a>
+                </li>
+
+                <!-- Profile / Account -->
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                        <a class="nav-action-link dropdown-toggle no-caret"
+                           href="#"
+                           id="profileDropdown"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <span class="action-icon-wrap">
+                                {% if user.avatar %}
+                                    <img src="{{ user.avatar.url }}" class="nav-avatar" alt="avatar">
+                                {% else %}
+                                    <span class="nav-avatar-initials">
+                                        {{ user.first_name.0|upper|default:user.email.0|upper }}
+                                    </span>
+                                {% endif %}
+                            </span>
+                            <span class="action-label">{{ user.first_name|default:'Profile' }}</span>
+                        </a>
+
+                        <!-- Profile Dropdown Menu -->
+                        <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="profileDropdown">
+                            <!-- User Info Header -->
+                            <li class="dropdown-header-block">
+                                <div class="d-flex align-items-center gap-3">
+                                    {% if user.avatar %}
+                                        <img src="{{ user.avatar.url }}" class="dd-avatar" alt="avatar">
+                                    {% else %}
+                                        <div class="dd-avatar-initials">
+                                            {{ user.first_name.0|upper|default:user.email.0|upper }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="overflow-hidden">
+                                        <div class="dd-user-name text-truncate">{{ user.get_full_name }}</div>
+                                        <div class="dd-user-email text-truncate">{{ user.email }}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider my-1"></li>
+
+                            <li>
+                                <a class="dropdown-item dd-item" href="{% url 'accounts:profile' %}">
+                                    <i class="fas fa-user-circle"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dd-item" href="{% url 'orders:list' %}">
+                                    <i class="fas fa-box-open"></i> My Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dd-item" href="{% url 'wishlist:list' %}">
+                                    <i class="fas fa-heart"></i> My Wishlist
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dd-item" href="{% url 'accounts:edit_profile' %}">
+                                    <i class="fas fa-sliders-h"></i> Settings
+                                </a>
+                            </li>
+
+                            {% if user.is_staff %}
+                                <li><hr class="dropdown-divider my-1"></li>
+                                <li>
+                                    <a class="dropdown-item dd-item" href="{% url 'dashboard:home' %}">
+                                        <i class="fas fa-chart-line"></i> Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item dd-item" href="{% url 'admin:index' %}">
+                                        <i class="fas fa-lock"></i> Admin Panel
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li>
+                                <a class="dropdown-item dd-item dd-item--danger" href="{% url 'accounts:logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+
+                    {% else %}
+                        <!-- Not logged in: show Login link -->
+                        <a class="nav-action-link" href="{% url 'accounts:login' %}">
+                            <span class="action-icon-wrap">
+                                <i class="far fa-user"></i>
+                            </span>
+                            <span class="action-label">Login</span>
+                        </a>
+                    {% endif %}
+                </li>
+
+            </ul><!-- /nav-actions -->
+        </div><!-- /desktopNav -->
+
+    </div><!-- /container-fluid -->
+</nav>
+
+<!-- ================================================================
+     MOBILE OFFCANVAS MENU
+================================================================ -->
+<div class="offcanvas offcanvas-start mobile-canvas" tabindex="-1" id="mobileMenuCanvas"
+     aria-labelledby="mobileMenuLabel">
+
+    <div class="offcanvas-header border-bottom">
+        <a class="navbar-brand" href="{% url 'core:home' %}">
+            <span class="brand-logo">Shop<span class="brand-accent">Style</span></span>
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body p-0">
+
+        {% if user.is_authenticated %}
+        <!-- Logged-in user header -->
+        <div class="mobile-user-header">
+            <div class="d-flex align-items-center gap-3">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" class="dd-avatar" alt="avatar">
+                {% else %}
+                    <div class="dd-avatar-initials">
+                        {{ user.first_name.0|upper|default:user.email.0|upper }}
+                    </div>
+                {% endif %}
+                <div>
+                    <div class="fw-bold">{{ user.get_full_name }}</div>
+                    <div class="small text-muted">{{ user.email }}</div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Guest: auth buttons -->
+        <div class="mobile-auth-header">
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-dark rounded-pill px-4 btn-sm">Login</a>
+            <a href="{% url 'accounts:register' %}" class="btn btn-dark rounded-pill px-4 btn-sm">Sign Up</a>
+        </div>
+        {% endif %}
+
+        <!-- Categories -->
+        <div class="mobile-section">
+            <div class="mobile-section-title">SHOP</div>
+            <ul class="mobile-nav-list">
+                <li><a href="{% url 'products:list' %}?gender=men"><i class="fas fa-tshirt"></i>Men</a></li>
+                <li><a href="{% url 'products:list' %}?gender=women"><i class="fas fa-female"></i>Women</a></li>
+                <li><a href="{% url 'products:list' %}?gender=kids"><i class="fas fa-child"></i>Kids</a></li>
+                <li><a href="{% url 'products:list' %}?category=home-living"><i class="fas fa-home"></i>Home & Living</a></li>
+                <li><a href="{% url 'products:list' %}?category=beauty"><i class="fas fa-spa"></i>Beauty</a></li>
+                <li class="text-danger"><a href="{% url 'products:list' %}?sale=true" class="text-danger"><i class="fas fa-bolt"></i>Sale</a></li>
+            </ul>
+        </div>
+
+        {% if user.is_authenticated %}
+        <!-- Account links -->
+        <div class="mobile-section">
+            <div class="mobile-section-title">MY ACCOUNT</div>
+            <ul class="mobile-nav-list">
+                <li><a href="{% url 'accounts:profile' %}"><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="{% url 'orders:list' %}"><i class="fas fa-box"></i>Orders</a></li>
+                <li><a href="{% url 'wishlist:list' %}"><i class="fas fa-heart"></i>Wishlist</a></li>
+                <li><a href="{% url 'accounts:edit_profile' %}"><i class="fas fa-cog"></i>Settings</a></li>
+                <li>
+                    <a href="{% url 'accounts:logout' %}" class="text-danger">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
+    </div><!-- /offcanvas-body -->
+</div>

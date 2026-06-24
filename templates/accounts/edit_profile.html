@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile — ShopStyle{% endblock %}
+
+{% block content %}
+<section class="profile-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-8">
+
+                <div class="profile-info-card">
+                    <div class="profile-info-header">
+                        <h5 class="profile-info-title">
+                            <i class="fas fa-sliders-h me-2"></i>Edit Profile
+                        </h5>
+                        <a href="{% url 'accounts:profile' %}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                            <i class="fas fa-arrow-left me-1"></i> Back
+                        </a>
+                    </div>
+
+                    <div class="profile-info-body">
+
+                        <!-- Avatar Preview -->
+                        <div class="text-center mb-4">
+                            <div class="edit-avatar-wrap">
+                                {% if request.user.avatar %}
+                                    <img src="{{ request.user.avatar.url }}"
+                                         id="avatarPreview"
+                                         alt="Avatar"
+                                         class="edit-avatar-img">
+                                {% else %}
+                                    <div class="edit-avatar-placeholder" id="avatarPreview">
+                                        {{ request.user.first_name.0|upper|default:'?' }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <label for="avatarInput" class="change-avatar-btn mt-3">
+                                <i class="fas fa-camera me-2"></i>Change Photo
+                            </label>
+                            <div class="text-muted small mt-1">
+                                JPEG or PNG, max 2 MB
+                            </div>
+                        </div>
+
+                        <form method="post"
+                              action="{% url 'accounts:edit_profile' %}"
+                              enctype="multipart/form-data"
+                              novalidate>
+                            {% csrf_token %}
+
+                            <!-- Hidden avatar field -->
+                            <div style="display:none;">{{ form.avatar }}</div>
+
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label class="auth-label">First Name</label>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="auth-error">{{ form.first_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="auth-label">Last Name</label>
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                        <div class="auth-error">{{ form.last_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="auth-label">Mobile Number</label>
+                                    {{ form.phone }}
+                                    {% if form.phone.errors %}
+                                        <div class="auth-error">{{ form.phone.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="auth-label">Date of Birth</label>
+                                    {{ form.date_of_birth }}
+                                    {% if form.date_of_birth.errors %}
+                                        <div class="auth-error">{{ form.date_of_birth.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 mt-4">
+                                <button type="submit" class="auth-btn" style="flex:1;">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                                <a href="{% url 'accounts:profile' %}"
+                                   class="auth-btn-outline" style="flex:1;text-align:center;">
+                                    Cancel
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Live avatar preview when user picks a file
+document.getElementById('avatarInput').addEventListener('change', function () {
+    var file = this.files[0];
+    if (!file) return;
+
+    // 2 MB check
+    if (file.size > 2 * 1024 * 1024) {
+        window.showToast('Image must be smaller than 2 MB.', 'error');
+        this.value = '';
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var preview = document.getElementById('avatarPreview');
+        // Replace placeholder div with an <img>
+        preview.outerHTML =
+            '<img src="' + e.target.result + '" id="avatarPreview" ' +
+            'class="edit-avatar-img" alt="Preview">';
+    };
+    reader.readAsDataURL(file);
+});
+</script>
+{% endblock %}

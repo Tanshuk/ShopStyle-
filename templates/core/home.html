@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fashion for Everyone{% endblock %}
+
+{% block content %}
+
+<!-- OFFERS BAR -->
+<div class="offers-bar">
+    <div class="offers-track">
+        <span class="offer-item"><i class="fas fa-truck"></i> Free delivery on orders above ₹499</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-tag"></i> New arrivals every week</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-undo"></i> 30-day easy returns</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-shield-alt"></i> 100% authentic products</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-percent"></i> Upto 70% off on top brands</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-truck"></i> Free delivery on orders above ₹499</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-tag"></i> New arrivals every week</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-undo"></i> 30-day easy returns</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-shield-alt"></i> 100% authentic products</span>
+        <span class="offer-sep">·</span>
+        <span class="offer-item"><i class="fas fa-percent"></i> Upto 70% off on top brands</span>
+        <span class="offer-sep">·</span>
+    </div>
+</div>
+
+<!-- HERO CAROUSEL -->
+<section class="hero-section">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide slide-1" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url({% static 'images/boys.png' %});">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <span class="hero-chip">New Collection 2025</span>
+                                    <h1 class="hero-title">Elevate Your<br>Style Game</h1>
+                                    <p class="hero-sub">Discover curated fashion from 5,000+ brands delivered to your door in 2 days.</p>
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <a href="{% url 'products:list' %}" class="hero-btn-primary">Shop Now <i class="fas fa-arrow-right ms-1"></i></a>
+                                        <a href="{% url 'products:categories' %}" class="hero-btn-outline">Explore</a>
+                                    </div>
+                                    <div class="hero-stats mt-4 d-flex gap-3 flex-wrap">
+                                        <div class="hero-stat-card"><span class="stat-num">5K+</span><span class="stat-lbl">Brands</span></div>
+                                        <div class="hero-stat-card"><span class="stat-num">2M+</span><span class="stat-lbl">Customers</span></div>
+                                        <div class="hero-stat-card"><span class="stat-num">4.8 <i class="fas fa-star" style="color:#fbbf24;font-size:.7em;"></i></span><span class="stat-lbl">Rating</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide slide-2" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url({% static 'images/shoes.png' %});">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <span class="hero-chip chip-sale">🔥 Limited Time</span>
+                                    <h1 class="hero-title">Upto 70% Off<br>Top Brands</h1>
+                                    <p class="hero-sub">Nike, Adidas, H&amp;M, Zara &amp; 200 more brands at unbeatable prices.</p>
+                                    <a href="{% url 'products:list' %}?sale=true" class="hero-btn-primary">Grab the Deal <i class="fas fa-bolt ms-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide slide-3" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url({% static 'images/women_winter.png' %});">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-lg-6">
+                                <div class="hero-content">
+                                    <span class="hero-chip chip-new">Just Arrived</span>
+                                    <h1 class="hero-title">Women's<br>Summer Edit</h1>
+                                    <p class="hero-sub">Flowy silhouettes, bold prints and effortless styles for every occasion.</p>
+                                    <a href="{% url 'products:list' %}?gender=women" class="hero-btn-primary">Shop Women <i class="fas fa-arrow-right ms-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-ctrl"><i class="fas fa-chevron-left"></i></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-ctrl"><i class="fas fa-chevron-right"></i></span>
+        </button>
+    </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trust-bar bg-white py-4">
+    <div class="container">
+        <div class="row g-3 g-md-0 text-center">
+            <div class="col-6 col-md-3">
+                <div class="trust-item">
+                    <i class="fas fa-truck-fast trust-icon"></i>
+                    <div class="trust-title">Free Delivery</div>
+                    <div class="trust-sub">Orders above ₹499</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="trust-item">
+                    <i class="fas fa-rotate-left trust-icon"></i>
+                    <div class="trust-title">Easy Returns</div>
+                    <div class="trust-sub">30-day hassle-free</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="trust-item">
+                    <i class="fas fa-shield-halved trust-icon"></i>
+                    <div class="trust-title">Secure Payment</div>
+                    <div class="trust-sub">100% safe checkout</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="trust-item">
+                    <i class="fas fa-headset trust-icon"></i>
+                    <div class="trust-title">24/7 Support</div>
+                    <div class="trust-sub">We're always here</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SHOP BY CATEGORY -->
+<section class="section bg-light py-5">
+    <div class="container">
+        <div class="section-top">
+            <div>
+                <p class="section-eyebrow">Browse By</p>
+                <h2 class="section-heading">Shop by Category</h2>
+            </div>
+            <a href="{% url 'products:categories' %}" class="section-link">All Categories <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+        <div class="row g-3">
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?gender=men" class="cat-pill" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+                    <i class="fas fa-tshirt cat-pill-icon"></i><span class="cat-pill-name">Men</span>
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?gender=women" class="cat-pill" style="background:linear-gradient(135deg,#f953c6,#b91d73);">
+                    <i class="fas fa-female cat-pill-icon"></i><span class="cat-pill-name">Women</span>
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?gender=kids" class="cat-pill" style="background:linear-gradient(135deg,#f093fb,#f5576c);">
+                    <i class="fas fa-child cat-pill-icon"></i><span class="cat-pill-name">Kids</span>
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?category=footwear" class="cat-pill" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">
+                    <i class="fas fa-shoe-prints cat-pill-icon"></i><span class="cat-pill-name">Footwear</span>
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?category=accessories" class="cat-pill" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">
+                    <i class="fas fa-gem cat-pill-icon"></i><span class="cat-pill-name">Accessories</span>
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="{% url 'products:list' %}?category=sports" class="cat-pill" style="background:linear-gradient(135deg,#fa709a,#fee140);">
+                    <i class="fas fa-running cat-pill-icon"></i><span class="cat-pill-name">Sports</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRENDING PRODUCTS (skeletons until Step 4) -->
+<section class="section py-5">
+    <div class="container">
+        <div class="section-top">
+            <div>
+                <p class="section-eyebrow">What's Hot</p>
+                <h2 class="section-heading">Trending Now</h2>
+            </div>
+            <a href="{% url 'products:list' %}" class="section-link">View All <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+        <div class="row g-3">
+            {% for i in "123456" %}
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="skel-card">
+                    <div class="skel skel-img"></div>
+                    <div class="p-3">
+                        <div class="skel skel-text short mb-2"></div>
+                        <div class="skel skel-text medium mb-2"></div>
+                        <div class="skel skel-text short"></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-center text-muted mt-3 small">
+            <i class="fas fa-info-circle me-1"></i> Products appear here after Step 4.
+        </p>
+    </div>
+</section>
+
+<!-- PROMO BANNERS -->
+<section class="py-4">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="promo-card" style="background:linear-gradient(135deg,#667eea,#764ba2);">
+                    <span class="promo-tag">Summer Special</span>
+                    <h3 class="promo-title">Men's Collection</h3>
+                    <p class="promo-price">Flat 40% Off</p>
+                    <a href="{% url 'products:list' %}?gender=men" class="promo-cta">Shop Now</a>
+                    <div class="promo-circle c1"></div><div class="promo-circle c2"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="promo-card" style="background:linear-gradient(135deg,#f953c6,#b91d73);">
+                    <span class="promo-tag">New Launch</span>
+                    <h3 class="promo-title">Women's Picks</h3>
+                    <p class="promo-price">Starting at ₹299</p>
+                    <a href="{% url 'products:list' %}?gender=women" class="promo-cta">Explore Now</a>
+                    <div class="promo-circle c1"></div><div class="promo-circle c2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- POPULAR BRANDS -->
+<section class="section bg-white py-5">
+    <div class="container">
+        <div class="section-top mb-4">
+            <div>
+                <p class="section-eyebrow">Shop By</p>
+                <h2 class="section-heading">Popular Brands</h2>
+            </div>
+        </div>
+        <div class="brands-scroll">
+            <div class="brand-chip brand-placeholder">Nike</div>
+            <div class="brand-chip brand-placeholder">Adidas</div>
+            <div class="brand-chip brand-placeholder">H&amp;M</div>
+            <div class="brand-chip brand-placeholder">Zara</div>
+            <div class="brand-chip brand-placeholder">Levi's</div>
+            <div class="brand-chip brand-placeholder">Puma</div>
+            <div class="brand-chip brand-placeholder">Reebok</div>
+            <div class="brand-chip brand-placeholder">Tommy Hilfiger</div>
+            <div class="brand-chip brand-placeholder">Calvin Klein</div>
+            <div class="brand-chip brand-placeholder">Mango</div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 text-center">
+                <p class="newsletter-eyebrow">Stay Updated</p>
+                <h2 class="newsletter-title">Join 2 Million+ Shoppers</h2>
+                <p class="newsletter-sub">Get exclusive deals, new arrivals and sale alerts right in your inbox.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    {% csrf_token %}
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe <i class="fas fa-paper-plane ms-1"></i></button>
+                </form>
+                <p class="newsletter-note mt-3"><i class="fas fa-lock me-1"></i> No spam, ever.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

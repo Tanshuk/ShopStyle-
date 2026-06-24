@@ -1,0 +1,134 @@
+{% load static %}
+{% load humanize %}
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4 g-lg-5 py-5">
+
+            <!-- ── Brand Column ── -->
+            <div class="col-lg-4 col-md-6">
+                <a href="{% url 'core:home' %}" class="text-decoration-none">
+                    <div class="footer-logo">Shop<span>Style</span></div>
+                </a>
+                <p class="footer-desc mt-3">
+                    India's favourite fashion destination for men, women and kids.
+                    Shop from 5,000+ brands at unbeatable prices with hassle-free returns.
+                </p>
+                <!-- Social Links -->
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter / X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Pinterest">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ── Company Links ── -->
+            <div class="col-lg-2 col-md-3 col-6">
+                <h6 class="footer-heading">Company</h6>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Investors</a></li>
+                    <li><a href="#">Partners</a></li>
+                </ul>
+            </div>
+
+            <!-- ── Help Links ── -->
+            <div class="col-lg-2 col-md-3 col-6">
+                <h6 class="footer-heading">Help</h6>
+                <ul class="footer-links">
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="{% url 'orders:list' %}">Track Order</a></li>
+                    <li><a href="#">Returns &amp; Exchange</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- ── Contact Info ── -->
+            <div class="col-lg-4 col-md-6">
+                <h6 class="footer-heading">Get In Touch</h6>
+                <div class="footer-contact">
+                    <div class="contact-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Fashion Street, Bandra West,<br>Mumbai, MH 400050, India</span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>1800-123-4567 <small class="text-muted">(Toll Free)</small></span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-envelope"></i>
+                        <span>support@shopstyle.in</span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-clock"></i>
+                        <span>Mon–Sat &nbsp;9 AM – 8 PM IST</span>
+                    </div>
+                </div>
+
+                <!-- Download App -->
+                <div class="mt-3">
+                    <div class="footer-heading mb-2">Download App</div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="#" class="app-store-btn">
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <div style="font-size:.6rem;opacity:.7;">Available on</div>
+                                <div style="font-size:.8rem;font-weight:700;">App Store</div>
+                            </div>
+                        </a>
+                        <a href="#" class="app-store-btn">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <div style="font-size:.6rem;opacity:.7;">Get it on</div>
+                                <div style="font-size:.8rem;font-weight:700;">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /row -->
+    </div><!-- /container -->
+
+    <!-- ── Footer Bottom Bar ── -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-md-6">
+                    <p class="mb-0 footer-copy">
+                        &copy; {% now "Y" %} ShopStyle. All rights reserved.
+                        Made with <i class="fas fa-heart" style="color:#FF3F6C;"></i> in India.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-2 justify-content-md-end flex-wrap">
+                        <span class="footer-copy me-1">We accept:</span>
+                        <span class="pay-badge"><i class="fab fa-cc-visa me-1"></i>Visa</span>
+                        <span class="pay-badge"><i class="fab fa-cc-mastercard me-1"></i>Master</span>
+                        <span class="pay-badge"><i class="fab fa-google-pay me-1"></i>GPay</span>
+                        <span class="pay-badge">UPI</span>
+                        <span class="pay-badge">COD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
